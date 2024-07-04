@@ -46,21 +46,43 @@ $response.Content</pre>
 
 
 <h3>3.Script to Login</h3>
-    <pre>$loginResponse = Invoke-RestMethod -Uri "http://localhost:5000/user/login" -Method POST -Body @{
-    "username" = "sameer";
-    "password" = "sameer2345";
+    <pre>
+$headers = @{
+    "Content-Type" = "application/json"
 }
 
-$loginResponse.token</pre>
+
+$body = @{
+    "username" = "ameer"
+    "password" = "ameer2345"
+} | ConvertTo-Json
+
+
+$loginResponse = Invoke-RestMethod -Uri "http://localhost:5000/user/login" -Method POST -Headers $headers -Body $body
+
+
+$loginResponse | ConvertTo-Json -Depth 10
+</pre>
 <p>This access token is used for accessing next endpoints </p>
-<h34.>Script for Availability of seats</h3>
-    <pre>$source = "Station A"
-$destination = "Station B"
-$token = "your_access_token_here"
+<h3>4.Script for Availability of seats</h3>
+    <pre>
+$headers = @{
+    "Content-Type" = "application/json"
+    "Authorization" = "Bearer <token>"
+}
 
-$trainsResponse = Invoke-RestMethod -Uri "http://localhost:5000/booking/availability?source=$source&destination=$destination" -Method GET -Headers @{ "Authorization" = "Bearer $token" }
 
-$trainsResponse</pre>
+$body = @{
+    "source" = "Station A"
+    "destination" = "Station B"
+} | ConvertTo-Json
+
+
+$response = Invoke-RestMethod -Uri "http://localhost:5000/booking/check_availability" -Method POST -Headers $headers -Body $body
+
+
+$response | ConvertTo-Json -Depth 10
+</pre></pre>
 
 
   
