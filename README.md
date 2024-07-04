@@ -11,6 +11,9 @@
 
 <h4>2. Install Python and Dependencies</h4>
 <p>Ensure Python 3.x is installed. Install required Python packages:</p>
+<pre>
+pip install Flask Flask-MySQLdb Flask-JWT-Extended
+    </pre>
 <h3>Clone the Repository</h4>
     <p>Clone the project repository from GitHub:</p>
     <pre>git clone https://github.com/moulipasalapudi/API_RAILWAYS_TASK.git
@@ -21,6 +24,7 @@
     <p>Run the Flask application:</p>
     <pre>python app.py</pre>
   <h3>Accessing Endpoints</h3>
+  <p>Make sure app.py is running on other terminal execute these scripts</p>
     <p>Use the following PowerShell scripts to interact with the application endpoints:</p>
     <h3>1.Script for Checking Whether Database is Accessible</h3>
     <pre>$response = Invoke-WebRequest -Uri http://localhost:5000/check/check_db -Method GET
@@ -48,7 +52,7 @@ $response.Content</pre>
 }
 
 $loginResponse.token</pre>
-<p>This access token is to  be copied for accessing next endpoints </p>
+<p>This access token is used for accessing next endpoints </p>
 <h34.>Script for Availability of seats</h3>
     <pre>$source = "Station A"
 $destination = "Station B"
