@@ -66,23 +66,17 @@ $loginResponse | ConvertTo-Json -Depth 10
 <p>This access token is used for accessing next endpoints </p>
 <h3>4.Script for Availability of seats</h3>
     <pre>
-$headers = @{
-    "Content-Type" = "application/json"
-    "Authorization" = "Bearer <token>"
+$endpoint = "http://127.0.0.1:5000/booking/check_availability"
+$token = "your_jwt_token"
+$data = @{
+    source = "A"
+    destination = "B"
 }
+$jsonData = $data | ConvertTo-Json
+$response = Invoke-RestMethod -Uri $endpoint -Method Post -ContentType "application/json" -Headers @{ Authorization = "Bearer $token" } -Body $jsonData
+$response
 
-
-$body = @{
-    "source" = "Station A"
-    "destination" = "Station B"
-} | ConvertTo-Json
-
-
-$response = Invoke-RestMethod -Uri "http://localhost:5000/booking/check_availability" -Method POST -Headers $headers -Body $body
-
-
-$response | ConvertTo-Json -Depth 10
-</pre></pre>
+</pre>
 
 
   
